@@ -5,6 +5,6 @@ Instructions for noobs:
 
 1. Download mod
 2. Put mod in mods
-3. Put cape image in 'simplecapes/'
+3. Put cape image (file named "cape.png) in 'simplecapes/'
 4. Launch game
 5. You got cape
