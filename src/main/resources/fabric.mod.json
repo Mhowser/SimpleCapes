@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "simplecapes",
+  "version": "${version}",
+  "name": "Simple Capes",
+  "description": "This mod gives you the ability to apply custom capes in a simple, manageable manner.",
+  "authors": [
+    "Maowcraft"
+  ],
+  "license": "CC0-1.0",
+  "icon": "assets/simplecapes/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "maowcraft.simplecapes.SimpleCapes"
+    ],
+    "rrp:pregen": [
+      "maowcraft.simplecapes.SimpleCapesRRP"
+    ]
+  },
+  "mixins": [
+    "simplecapes.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.8.4+build.198",
+    "fabric": "*",
+    "minecraft": "1.15.2"
+  }
+}

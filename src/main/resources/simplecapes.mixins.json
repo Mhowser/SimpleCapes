@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "maowcraft.simplecapes.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "PlayerListEntryMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
