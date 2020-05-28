@@ -7,6 +7,7 @@ import net.minecraft.util.Identifier;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 public class SimpleCapesRRP implements RRPPreGenEntrypoint {
@@ -17,8 +18,13 @@ public class SimpleCapesRRP implements RRPPreGenEntrypoint {
         BufferedImage capeImage;
         SimpleCapes.writeDirectories();
         try {
-            capeImage = ImageIO.read(SimpleCapes.capeFile.toFile());
-            RESOURCE_PACK.addTexture(new Identifier(SimpleCapes.MODID, "cape"), capeImage);
+            for (File file : SimpleCapes.grabAllCapeTextures()) {
+                capeImage = ImageIO.read(file);
+                String identifierFile = file.getName().substring(0, file.getName().indexOf('.')).replace(' ', '_').toLowerCase() + file.getName().hashCode();
+                System.out.println(identifierFile);
+                SimpleCapes.identifiers.add(identifierFile);
+                RESOURCE_PACK.addTexture(new Identifier(SimpleCapes.MODID, identifierFile), capeImage);
+            }
         } catch (IOException ex) {
             ex.printStackTrace();
         }

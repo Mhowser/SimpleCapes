@@ -3,9 +3,13 @@
   "package": "maowcraft.simplecapes.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "CapeFeatureRendererMixin",
     "PlayerListEntryMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "client": [
+    "SettingsScreenMixin",
+  ]
 }

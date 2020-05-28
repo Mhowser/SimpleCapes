@@ -19,11 +19,10 @@ public abstract class PlayerListEntryMixin {
     @Accessor
     public abstract Map<MinecraftProfileTexture.Type, Identifier> getTextures();
 
-    private final Identifier cape = new Identifier(SimpleCapes.MODID, "textures/cape.png");
-
     @Environment(EnvType.CLIENT)
     @Inject(method = "getCapeTexture", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/PlayerListEntry;loadTextures()V"))
     public void injectIntoTextures(CallbackInfoReturnable<Identifier> cir) {
+        Identifier cape = new Identifier(SimpleCapes.MODID, "textures/" + SimpleCapes.selectedIdentifier + ".png");
         getTextures().put(MinecraftProfileTexture.Type.CAPE, cape);
     }
 }
