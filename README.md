@@ -1,4 +1,4 @@
-# SimpleCapes
+# Simple Capes
 An open-source, free, and simple Minecraft capes mod.
 
 Instructions for noobs:
