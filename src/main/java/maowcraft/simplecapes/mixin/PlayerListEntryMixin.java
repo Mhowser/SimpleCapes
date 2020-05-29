@@ -1,5 +1,6 @@
 package maowcraft.simplecapes.mixin;
 
+import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import maowcraft.simplecapes.SimpleCapes;
 import net.fabricmc.api.EnvType;
@@ -19,10 +20,16 @@ public abstract class PlayerListEntryMixin {
     @Accessor
     public abstract Map<MinecraftProfileTexture.Type, Identifier> getTextures();
 
+    @Accessor
+    public abstract GameProfile getProfile();
+
     @Environment(EnvType.CLIENT)
     @Inject(method = "getCapeTexture", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/PlayerListEntry;loadTextures()V"))
     public void injectIntoTextures(CallbackInfoReturnable<Identifier> cir) {
-        Identifier cape = new Identifier(SimpleCapes.MODID, "textures/" + SimpleCapes.selectedIdentifier + ".png");
-        getTextures().put(MinecraftProfileTexture.Type.CAPE, cape);
+        String identifierHashCode = SimpleCapes.selectedIdentifier.substring(SimpleCapes.selectedIdentifier.indexOf('-') + 1);
+        if (String.valueOf(Math.abs(getProfile().getName().hashCode())).equals(identifierHashCode)) {
+            Identifier cape = new Identifier(SimpleCapes.MODID, "textures/" + SimpleCapes.selectedIdentifier + ".png");
+            getTextures().put(MinecraftProfileTexture.Type.CAPE, cape);
+        }
     }
 }

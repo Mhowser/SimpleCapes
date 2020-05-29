@@ -24,13 +24,14 @@ public abstract class SettingsScreenMixin extends Screen {
 
     @Inject(method = "init", at = @At("TAIL"))
     public void addCapeInfo(CallbackInfo ci) {
-        this.addButton(new ButtonWidget(this.width / 2 - 155, this.height / 6 + 144 - 6, 150, 20, "Cycle Cape", (buttonWidget) -> {
-            currentIndex = cycleInt(capeIndex, currentIndex);
-            SimpleCapes.selectedIdentifier = SimpleCapes.identifiers.get(currentIndex);
-            System.out.println(SimpleCapes.identifiers.get(currentIndex));
-            SimpleCapes.validateConfigExistence();
-            SimpleCapes.writeConfig();
-        }));
+        if (!SimpleCapes.identifiers.isEmpty()) {
+            this.addButton(new ButtonWidget(this.width / 2 - 155, this.height / 6 + 144 - 6, 150, 20, "Cycle Cape", (buttonWidget) -> {
+                currentIndex = cycleInt(capeIndex, currentIndex);
+                SimpleCapes.selectedIdentifier = SimpleCapes.identifiers.get(currentIndex);
+                SimpleCapes.validateConfigExistence();
+                SimpleCapes.writeConfig();
+            }));
+        }
     }
 
     private int cycleInt(int index, int i) {
@@ -44,6 +45,10 @@ public abstract class SettingsScreenMixin extends Screen {
 
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/SettingsScreen;drawCenteredString(Lnet/minecraft/client/font/TextRenderer;Ljava/lang/String;III)V"))
     public void addCapeInfoPart2(int mouseX, int mouseY, float delta, CallbackInfo ci) {
-        this.drawString(this.font, "Selected: " + SimpleCapes.selectedIdentifier, this.width / 2 + 8, this.height / 6 + 146, 16777215);
+        if (!SimpleCapes.identifiers.isEmpty()) {
+            this.drawString(this.font, "Selected: " + SimpleCapes.selectedIdentifier, this.width / 2 + 8, this.height / 6 + 146, 16777215);
+        } else {
+            this.drawCenteredString(this.font, "No capes found.", this.width / 2, this.height / 6 + 146, 16777215);
+        }
     }
 }

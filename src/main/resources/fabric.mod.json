@@ -12,9 +12,6 @@
   "entrypoints": {
     "main": [
       "maowcraft.simplecapes.SimpleCapes"
-    ],
-    "rrp:pregen": [
-      "maowcraft.simplecapes.SimpleCapesRRP"
     ]
   },
   "mixins": [
